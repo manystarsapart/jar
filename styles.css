@@ -1,0 +1,25 @@
+* {
+    /* border: red solid 2px; */
+    padding: 1rem;
+    color:white;
+    background-color: black;
+
+}
+
+.column-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+.name-button {
+    font-size:large;
+}
+
+.name-button:hover {
+    background-color: red;
+}
+
+.column {
+
+}
