@@ -3,17 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>the Playground</title>
+    <title>The Playground</title>
     <link rel="stylesheet" href="../styles.css">
-    <!-- <script type="module" src="script.js"></script> -->
     <script src="playground.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
     <script src="https://unpkg.com/@tonejs/midi"></script>
-
 </head>
 <body>
-    <div class="column-container">
-        <div style="font-size:xx-large;">play notes</div>
+    <div class="column-container">  
+        <div style="font-size: xx-large;">play notes</div>
+    </div>
+
+    <button id="doublekeyboard" class="playground-button">doublekeyboard (default)</button>
+    <button id="singlekeyboard1" class="playground-button">singlekeyboard (low)</button>
+    <button id="singlekeyboard2" class="playground-button">singlekeyboard (high)</button>
+
+    <div id="status-div">
+        
+    </div>
     
 </body>
 </html>

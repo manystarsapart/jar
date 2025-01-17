@@ -1,9 +1,7 @@
 * {
-    /* border: red solid 2px; */
     padding: 1rem;
-    color:white;
+    color: white;
     background-color: black;
-
 }
 
 .column-container {
@@ -20,5 +18,16 @@
 }
 
 .name-button:hover {
+    background-color: red;
+}
+
+.playground-button {
+    font-size: large;
+    border-radius: 1rem;
+    width: auto;
+    height: 5rem;
+}
+
+.playground-button:hover {
     background-color: red;
 }
