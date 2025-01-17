@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
     b6.addEventListener("click", (e) => {
         // send a request to db to add b6 count by 1
-        
+        updateStatusMsg("b6 count +1");
     });
 
 function updateStatusMsg(message) {
