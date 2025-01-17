@@ -6,6 +6,13 @@ document.addEventListener("DOMContentLoaded", (e) => {
     let statusDiv = document.getElementById("status-div");
     updateStatusMsg("Initialised!");
 
+    const synth = new Tone.Synth().toDestination();
+
+    function playNote(midiNote) {
+    synth.triggerAttackRelease(Tone.Frequency(midiNote, "midi"), "8n");
+};
+
+
     // buttons:
     // 1: ea
     // 2: wy
@@ -14,43 +21,45 @@ document.addEventListener("DOMContentLoaded", (e) => {
     // 5: sy
     // 6: ai
 
-    let b1 = document.getElementById("b1");
-    let b2 = document.getElementById("b2");
-    let b3 = document.getElementById("b3");
-    let b4 = document.getElementById("b4");
-    let b5 = document.getElementById("b5");
-    let b6 = document.getElementById("b6");
+    // const buttons = Array.from({ length: 6 }, (_, i) => document.getElementById(`b${i + 1}`));
 
-    b1.addEventListener("click", (e) => {
-        // send a request to db to add b1 count by 1
-        updateStatusMsg("b1 count +1");
-    });
+    // buttons.forEach((button, i) => {
+    //     button.addEventListener("click", () => incrementSwear(i + 1));
+    // });
 
-    b2.addEventListener("click", (e) => {
-        // send a request to db to add b2 count by 1
-        updateStatusMsg("b2 count +1");
+    // document.addEventListener("keydown", (event) => {
+    //     const key = event.key;
+    //     if (key >= "1" && key <= "6") {
+    //         const index = parseInt(key) - 1;
+    //         incrementSwear(index + 1);
+    //     }
+    // });
+    
+    const swearMap = {
+        'click': e => e.target.id.slice(1),
+        'keydown': e => e.key
+    };
+    
+    document.addEventListener('click', handleSwear);
+    document.addEventListener('keydown', handleSwear);
+    
+    function handleSwear(event) {
+        const value = swearMap[event.type](event);
+        if (value >= '1' && value <= '6') {
+            incrementSwear(parseInt(value));
+        };
+    };
+    
 
-    });
+    function incrementSwear(personIndex) {
+        // TODO: CONNECT TO DB TO SEND REQUEST TO INCREMENT COUNT OF PERSON BY 1
 
-    b3.addEventListener("click", (e) => {
-        // send a request to db to add b3 count by 1
-        updateStatusMsg("b3 count +1");
-    });
+        // updates in statusdiv
+        updateStatusMsg(`person ${personIndex} count +1`);
+        const midiNotes = [60, 60, 62, 64, 65, 67, 69];
+        playNote(midiNotes[personIndex]);
+    };
 
-    b4.addEventListener("click", (e) => {
-        // send a request to db to add b4 count by 1
-        updateStatusMsg("b4 count +1");
-    });
-
-    b5.addEventListener("click", (e) => {
-        // send a request to db to add b5 count by 1
-        updateStatusMsg("b5 count +1");
-    });
-
-    b6.addEventListener("click", (e) => {
-        // send a request to db to add b6 count by 1
-        updateStatusMsg("b6 count +1");
-    });
 
 function updateStatusMsg(message) {
     const now = new Date(Date.now());

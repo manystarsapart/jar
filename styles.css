@@ -13,13 +13,12 @@
 }
 
 .name-button {
-    font-size:large;
+    font-size: large;
+    border-radius: 1rem;
+    width: 7rem;
+    height: 5rem;
 }
 
 .name-button:hover {
     background-color: red;
-}
-
-.column {
-
 }
