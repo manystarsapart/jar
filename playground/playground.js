@@ -1,8 +1,12 @@
 document.addEventListener("DOMContentLoaded", (e) => {
 
     let messages = [];
-    let statusDiv = document.getElementById("status-div");
+    const statusDiv = document.getElementById("status-div");
+    const transposeValueBox = document.getElementById("transpose-value");
+    const scaleValueBox = document.getElementById("scale-value");
+    const clearButton = document.getElementById("clear-button");
     updateStatusMsg("Initialised!");
+    let transposeValue = 0;
 
     const dbLetterMap = {
         'q': 36, 'w': 38, 'e': 40, 'r': 41, 't': 43,
@@ -25,6 +29,23 @@ document.addEventListener("DOMContentLoaded", (e) => {
         'z': 77, 'x': 79, 'c': 81, 'v': 83, 'b': 84,
     };
 
+    const pitchMap = {
+        '`': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, 
+        '6': 6, '7': 7, '8': 8, '9': 9, '0':10, '-': 11, 
+        '=': 12
+    }
+
+    const transposeMap = {
+        '0': "C", '1': "C#",
+        '2': "D", '3': "D#",
+        '4': "E", 
+        '5': "F", '6': "F#",
+        '7': "G", '8': "G#",
+        '9': "A", '10': "Bb",
+        '11': "B", 
+        '12': "C"
+    }
+
     let letterMap = dbLetterMap;
     const pressedKeys = new Set();
     const synth = new Tone.PolySynth(Tone.Synth).toDestination();
@@ -35,7 +56,15 @@ document.addEventListener("DOMContentLoaded", (e) => {
         const key = event.key.toLowerCase();
         if (key in letterMap && !pressedKeys.has(key)) {
             pressedKeys.add(key);
-            synth.triggerAttack(Tone.Frequency(letterMap[key], "midi"));
+            synth.triggerAttack(Tone.Frequency(letterMap[key]+transposeValue, "midi"));
+            // console.log("played: " + letterMap[key]+transposeValue); 
+        } else if (key in pitchMap && !pressedKeys.has(key)) {
+            transposeValue = pitchMap[key];
+            transposeValueBox.innerHTML = pitchMap[key];
+            scaleValueBox.innerHTML = transposeMap[pitchMap[key]];
+            updateStatusMsg("transpose value updated to: " + pitchMap[key] + ". this means Q is playing " + pitchMap[key] + " semitones higher than C.");
+            // console.log("key: " + key);
+            
         }
     }
     
@@ -43,7 +72,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
         const key = event.key.toLowerCase();
         if (key in letterMap) {
             pressedKeys.delete(key);
-            synth.triggerRelease(Tone.Frequency(letterMap[key], "midi"));
+            synth.triggerRelease(Tone.Frequency(letterMap[key]+transposeValue, "midi"));
         }
     }
 
@@ -76,6 +105,13 @@ document.addEventListener("DOMContentLoaded", (e) => {
         letterMap = dbLetterMap;
         updateStatusMsg("current: doublekeyboard");
     })
+
+    clearButton.addEventListener("click", (e) => {
+        // clears status div
+        messages = [];
+        statusDiv.innerHTML = "";
+    })
+
 
 
 

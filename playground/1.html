@@ -13,7 +13,15 @@
     <div>  
         <div style="font-size: xx-large;">play notes</div>
     </div>
-    <div style="font-size:large">index: <br \></div>
+    <div style="font-size:large">
+        index: "` 1 2 3 4 5 6 7 8 9 0 - =" transposes the notes. click letters below to play notes<br \>
+        <br \>
+        <br \>
+        <br \>
+        current transpose value =<span id="transpose-value">0</span>. current key:<span id="scale-value">C</span>
+    </div> 
+
+
     <div class="column-container" style="font-size: x-large;">
 
         <div class="column">
@@ -25,6 +33,7 @@
             y u i o p <br \>
             h j k l ; <br \>
             n m , . / <br \>
+            <br \>
             (if doublekeyboard)
         </div>
 
@@ -34,6 +43,7 @@
     <button id="doublekeyboard" class="playground-button">doublekeyboard (default)</button>
     <button id="singlekeyboard1" class="playground-button">singlekeyboard (low)</button>
     <button id="singlekeyboard2" class="playground-button">singlekeyboard (high)</button>
+    <button id="clear-button" class="playground-button">clear status</button>
 
     <div id="status-div">
         
